@@ -5,11 +5,15 @@
  */
 package g54895.atl.stibride.main;
 
-import g54895.atl.stibride.model.Model;
+import g54895.atl.stibride.model.PathFinder;
 import g54895.atl.stibride.presenter.Presenter;
 import g54895.atl.stibride.view.View;
+import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -17,6 +21,8 @@ import javafx.stage.Stage;
  * @author ayoub
  */
 public class Main extends Application {
+
+    private static Scene scene;
 
     /**
      * Entry points to the <code> Lotto </code> application..
@@ -28,22 +34,32 @@ public class Main extends Application {
     }
 
     public Main() {
+
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println("DEBUG | MAIN       | Début du programme");
+        Main main = new Main();
+        PathFinder model = new PathFinder();
+        
+        scene = new Scene(loadFXML("primary"), 640, 480);
+        View view = new View(scene/*stage*/);      
+        stage.setScene(scene);
 
-        //Model model = new Model();
-        View view = new View(stage);
-        //Presenter presenter = new Presenter(model, view);
-        System.out.println("");
+        Presenter presenter = new Presenter(model, view);
 
-        System.out.println("DEBUG | MAIN       | Ajoute le lien observateur-observé entre le presenter et le modèle");
-        //model.addObserver(presenter);
+        model.addObserver(presenter);
         //view.addHandlerButton(presenter);
-        System.out.println("");
-
-        //presenter.initialize();
-        System.out.println("");
+        presenter.initialize();
+        view.showStage();
     }
+
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+}
