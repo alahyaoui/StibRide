@@ -5,12 +5,11 @@
  */
 package g54895.atl.stibride.model;
 
-import javafx.beans.Observable;
-
 /**
  *
  * @author ayoub
  */
-public interface Model extends Observable {
+public interface Model {
 
+    public void search(int idOrigin, int idDestination);
 }

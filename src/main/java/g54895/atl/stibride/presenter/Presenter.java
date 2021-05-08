@@ -5,10 +5,10 @@
  */
 package g54895.atl.stibride.presenter;
 
+import atl.observer.Observable;
+import atl.observer.Observer;
 import g54895.atl.stibride.model.Model;
 import g54895.atl.stibride.view.View;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  *
@@ -23,15 +23,20 @@ public class Presenter implements Observer {
         this.model = model;
         this.view = view;
     }
-
+    
     public void initialize() {
         //model.initialize();
         //view.initialize();
     }
-
+    
+    public void doResearch(String origin, String destination) {
+        
+        model.search(0, 0);
+    }
+    
     @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Observable observable, Object arg) {
+        
     }
     
 }
