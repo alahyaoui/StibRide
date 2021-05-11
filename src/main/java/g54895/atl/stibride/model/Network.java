@@ -96,6 +96,7 @@ public class Network {
         Node destinationNode = graphStations.search(destinationStationKey);
 
         originNode.addDestination(destinationNode, 1);
+        destinationNode.addDestination(originNode, 1);
     }
 
     public Graph getGraphStations() {
