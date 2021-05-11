@@ -5,6 +5,8 @@
  */
 package g54895.atl.stibride.model;
 
+import java.util.List;
+
 /**
  *
  * @author ayoub
@@ -12,4 +14,12 @@ package g54895.atl.stibride.model;
 public interface Model {
 
     public void search(int idOrigin, int idDestination);
+    
+    public void search(String origin, String destination);
+    
+    public List<Node> getSearchResult();
+    
+    public List<String> getSearchResult2();
+    
+    public Network getNetwork();
 }
