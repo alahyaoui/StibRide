@@ -16,8 +16,8 @@ public class RepositoryException extends Exception {
     }
 
     /**
-     * Constructs an instance of <code>RepositoryException</code> with the specified
-     * detail message.
+     * Constructs an instance of <code>RepositoryException</code> with the
+     * specified detail message.
      *
      * @param msg message of the exception.
      */
@@ -26,8 +26,8 @@ public class RepositoryException extends Exception {
     }
 
     /**
-     * Constructs an instance of <code>RepositoryException</code> and wrapped the
-     * source exception.
+     * Constructs an instance of <code>RepositoryException</code> and wrapped
+     * the source exception.
      *
      * @param exception wrapped exception.
      */
