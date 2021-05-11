@@ -10,19 +10,19 @@ package g54895.atl.stibride.dto;
  * @author Ayoub
  */
 public class StationsDto extends Dto<Integer> {
-    
-    private String stationName;
+
+    private String name;
 
     public StationsDto(Integer key) {
         super(key);
     }
 
-    public StationsDto(Integer key, String stationName) {
+    public StationsDto(Integer key, String name) {
         super(key);
-        this.stationName = stationName;
+        this.name = name;
     }
 
-    public String getStationName() {
-        return stationName;
+    public String getName() {
+        return name;
     }
 }
