@@ -19,7 +19,8 @@ public interface Repository<K, T extends Dto<K>> {
      *
      * @return all the elements of the repository.
      *
-     * @throws RepositoryException if the repository can't access to the elements.
+     * @throws RepositoryException if the repository can't access to the
+     * elements.
      */
     List<T> getAll() throws RepositoryException;
 
@@ -29,18 +30,24 @@ public interface Repository<K, T extends Dto<K>> {
      * @param key key of the element.
      *
      * @return the element of the repository with the specific key.
-     * @throws RepositoryException if the repository can't access to the element.
+     * @throws RepositoryException if the repository can't access to the
+     * element.
      */
     T get(K key) throws RepositoryException;
-    
+
+    T get(String string) throws RepositoryException;
+
     /**
      * Returns true if the element exist in the repository and false otherwise.
      * An element is found by this key.
      *
      * @param key key of the element.
      * @return true if the element exist in the repository and false otherwise.
-     * @throws RepositoryException if the repository can't access to the element.
+     * @throws RepositoryException if the repository can't access to the
+     * element.
      */
     boolean contains(K key) throws RepositoryException;
+
+    boolean contains(String stationName) throws RepositoryException;
 
 }

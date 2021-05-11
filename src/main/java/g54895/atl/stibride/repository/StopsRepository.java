@@ -28,14 +28,24 @@ public class StopsRepository implements Repository<Integer, StopsDto> {
 
     @Override
     public StopsDto get(Integer key) throws RepositoryException {
-        StopsDto refreshItem = dao.select(key);
-        return refreshItem;
+        return dao.select(key);
+    }
+
+    @Override
+    public StopsDto get(String stationName) throws RepositoryException {
+        return dao.select(stationName);
     }
 
     @Override
     public boolean contains(Integer key) throws RepositoryException {
-        StopsDto refreshItem = dao.select(key);
-        return refreshItem != null;
+        var results = dao.select(key);
+        return results != null;
+    }
+
+    @Override
+    public boolean contains(String stationName) throws RepositoryException {
+        var results = dao.select(stationName);
+        return results != null;
     }
 
 }
