@@ -5,6 +5,7 @@
  */
 package g54895.atl.stibride.model;
 
+import g54895.atl.stibride.dto.StationsDto;
 import java.util.List;
 
 /**
@@ -14,12 +15,14 @@ import java.util.List;
 public interface Model {
 
     public void search(int idOrigin, int idDestination);
-    
+
     public void search(String origin, String destination);
-    
+
     public List<Node> getSearchResult();
-    
+
     public List<String> getSearchResult2();
-    
+
+    public List<StationsDto> getSearchResult3();
+
     public Network getNetwork();
 }
