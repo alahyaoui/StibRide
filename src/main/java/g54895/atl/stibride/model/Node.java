@@ -19,23 +19,39 @@ public class Node {
 
     private StationsDto station;
 
-    private List<Node> shortestPath = new LinkedList<>();
+    private List<Node> shortestPath;// = new LinkedList<>();
 
-    private Integer distance = Integer.MAX_VALUE;
+    private Integer distance;// = Integer.MAX_VALUE;
 
-    Map<Node, Integer> adjacentNodes = new HashMap<>();
+    Map<Node, Integer> adjacentNodes;// = new HashMap<>();
+
+    public Node(StationsDto station) {
+        this.station = station;
+        shortestPath = new LinkedList<>();
+        distance = Integer.MAX_VALUE;
+        adjacentNodes = new HashMap<>();
+    }
 
     public void addDestination(Node destination, int distance) {
         adjacentNodes.put(destination, distance);
     }
 
-    public Node(StationsDto station) {
-        this.station = station;
+    public boolean containsDestination(Node destination) {
+        for (Node node : adjacentNodes.keySet()) {
+            if (node.equals(destination)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void clearShortestPath() {
+        shortestPath.clear();
     }
 
     public StationsDto getStation() {
         return station;
-    }   
+    }
 
     public Map<Node, Integer> getAdjacentNodes() {
         return adjacentNodes;

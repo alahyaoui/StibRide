@@ -17,15 +17,14 @@ import java.util.Set;
  */
 public class Graph {
 
-    private Set<Node> nodes = new HashSet<>();
+    private Set<Node> nodes;// = new HashSet<>();
+
+    public Graph() {
+        nodes = new HashSet<>();
+    }
 
     public void addNode(Node node) {
         nodes.add(node);
-    }
-
-    // getters and setters 
-    public Set<Node> getNodes() {
-        return nodes;
     }
 
     public Node search(int key) {
@@ -41,11 +40,23 @@ public class Graph {
     public Node search(String stationName) {
         for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
             Node node = it.next();
-            if ((stationName.equals(node.getStation().getStationName()))) {
+            if ((stationName.equals(node.getStation().getName()))) {
                 return node;
             }
         }
         return null;
+    }
+
+    public void clearResearch() {
+        for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
+            Node node = it.next();
+            node.clearShortestPath();
+        }
+    }
+
+    // getters and setters 
+    public Set<Node> getNodes() {
+        return nodes;
     }
 
 }
