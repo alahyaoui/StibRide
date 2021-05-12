@@ -37,9 +37,12 @@ public class View {
     }
 
     public View(Stage stage) throws IOException {
-        this.scene = new Scene(loadFXML("primary"), 640, 480);
-        primaryStage = stage;
+        this.scene = new Scene(loadFXML("primary"), 800, 760);
+        
+        this.primaryStage = stage;
         this.primaryStage.setScene(scene);
+        this.primaryStage.setMinHeight(800);
+        this.primaryStage.setMinWidth(760);
     }
 
     public void initialize(Presenter presenter) throws IOException {
