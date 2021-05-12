@@ -95,12 +95,21 @@ public class Network {
         Node originNode = graphStations.search(originStationKey);
         Node destinationNode = graphStations.search(destinationStationKey);
 
-        originNode.addDestination(destinationNode, 1);
-        destinationNode.addDestination(originNode, 1);
+        if (!originNode.containsDestination(destinationNode)) {
+            originNode.addDestination(destinationNode, 1);
+        }
+
+        if (!destinationNode.containsDestination(originNode)) {
+            destinationNode.addDestination(originNode, 1);
+        }
     }
 
     public Graph getGraphStations() {
         return graphStations;
+    }
+
+    public void setGraphStations(Graph graphStations) {
+        this.graphStations = graphStations;
     }
 
 }
