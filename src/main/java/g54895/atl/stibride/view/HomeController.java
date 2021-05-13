@@ -54,19 +54,10 @@ public class HomeController implements Initializable {
 
         origin.setValue(origin.getItems().get(0));
         destination.setValue(destination.getItems().get(1));
+        
     }
 
-    /*public void updateTableView(List<String> stations) {
-        ObservableList<String> data = FXCollections.observableArrayList();
-        
-        for (var row : stations) {
-            data.add(row);//.add(FXCollections.observableArrayList(row));
-        }
-        //resultResearch.getItems().addAll(FXCollections.observableArrayList(stations));
-        //resultResearch.getItems().add(data);//.setItems(data);
-        //resultResearch.getColumns().set(0, stations);
-        resultResearch.setItems(data);
-    }*/
+    
     public void updateTableView(List<StationsDto> stations) {
         /*
         resultResearch.getItems().clear();
@@ -91,7 +82,18 @@ public class HomeController implements Initializable {
         View.setHomeController(this);
 
         stationCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-
     }
 
 }
+
+/*public void updateTableView(List<String> stations) {
+        ObservableList<String> data = FXCollections.observableArrayList();
+        
+        for (var row : stations) {
+            data.add(row);//.add(FXCollections.observableArrayList(row));
+        }
+        //resultResearch.getItems().addAll(FXCollections.observableArrayList(stations));
+        //resultResearch.getItems().add(data);//.setItems(data);
+        //resultResearch.getColumns().set(0, stations);
+        resultResearch.setItems(data);
+    }*/

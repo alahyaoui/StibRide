@@ -80,7 +80,6 @@ public class View {
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-
 }
 
 /*
