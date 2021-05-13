@@ -5,6 +5,7 @@
  */
 package g54895.atl.stibride.model;
 
+import atl.observer.Observer;
 import g54895.atl.stibride.dto.StationsDto;
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface Model {
     public List<StationsDto> getSearchResult3();
 
     public Network getNetwork();
+
+    public void addObserver(Observer observer);
 }

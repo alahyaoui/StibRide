@@ -28,13 +28,15 @@ public class Presenter implements Observer {
     private Model model;
     private View view;
 
-    public Presenter(Model model, View view) {
+    public Presenter(Model model, View view) throws RepositoryException, IOException {
         this.model = model;
         this.view = view;
+        initialize();
     }
 
     public void initialize() throws RepositoryException, IOException {
         //model.initialize();
+        model.addObserver(this);
         view.initialize(this);
         initChoiceBox();
     }
@@ -78,7 +80,7 @@ public class Presenter implements Observer {
         try {
             //view.updateTableView(savedModel.getSearchResult2());
             view.updateTableView(savedModel.getSearchResult3());
-            
+
         } catch (IOException ex) {
             Logger.getLogger(Presenter.class.getName()).log(Level.SEVERE, null, ex);
         }

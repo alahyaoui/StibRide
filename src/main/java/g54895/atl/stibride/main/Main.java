@@ -23,38 +23,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    /*private static Scene scene;
-
-    @Override
-    public void start(Stage stage) throws IOException, RepositoryException {
-        scene = new Scene(loadFXML("./g54895/atl/stibride/view/primary"), 640, 480);
-        stage.setScene(scene);
-        
-        PathFinder model = new PathFinder();
-        View view = new View(scene);
-        Presenter presenter = new Presenter(model, view);
-        
-        model.addObserver(presenter);
-        presenter.initialize();
-        
-        stage.show();
-    }
-
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }*/
-    //private static Scene scene;
     /**
-     * Entry points to the <code> Lotto </code> application..
+     * Entry points to the <code> StibRide </code> application..
      *
      * @param args no arguments needed.
      */
@@ -68,20 +38,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Main main = new Main();
         PathFinder model = new PathFinder();
 
-        //scene = new Scene(loadFXML("primary"), 640, 480);
         View view = new View(/*scene*/stage);
-        //stage.setScene(scene);
 
         Presenter presenter = new Presenter(model, view);
 
-        model.addObserver(presenter);
-        //view.addHandlerButton(presenter);
-        
-        presenter.initialize();
-        //view.setPresenter(presenter);
         view.showStage();
     }
 }
