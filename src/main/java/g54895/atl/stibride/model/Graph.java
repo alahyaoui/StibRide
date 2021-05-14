@@ -51,6 +51,7 @@ public class Graph {
         for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
             Node node = it.next();
             node.clearShortestPath();
+            node.setDistance(Integer.MAX_VALUE);
         }
     }
 
