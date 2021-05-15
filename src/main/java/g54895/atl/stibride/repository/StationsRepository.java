@@ -14,9 +14,9 @@ import java.util.List;
  *
  * @author Ayoub
  */
-public class StationsRepository implements Repository<Integer, StationsDto>{
+public class StationsRepository implements Repository<Integer, StationsDto> {
 
-   private final StationsDao dao;
+    private final StationsDao dao;
 
     public StationsRepository() throws RepositoryException {
         dao = StationsDao.getInstance();
@@ -36,7 +36,7 @@ public class StationsRepository implements Repository<Integer, StationsDto>{
         return dao.select(key);
     }
 
-    @Override
+    //@Override
     public StationsDto get(String stationName) throws RepositoryException {
         return dao.select(stationName);
     }
@@ -47,10 +47,10 @@ public class StationsRepository implements Repository<Integer, StationsDto>{
         return results != null;
     }
 
-    @Override
+    //@Override
     public boolean contains(String stationName) throws RepositoryException {
         var results = dao.select(stationName);
         return results != null;
     }
-    
+
 }

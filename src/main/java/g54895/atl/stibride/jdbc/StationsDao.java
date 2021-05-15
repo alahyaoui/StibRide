@@ -75,9 +75,9 @@ public class StationsDao implements Dao<Integer, StationsDto> {
         return dto;
     }
 
-    @Override
-    public StationsDto select(String stationName) throws RepositoryException {
-        if (stationName == null || stationName == "") {
+    //@Override
+    public StationsDto select(String key) throws RepositoryException {
+        if (key == null || key == "") {
             throw new RepositoryException("Aucune clé donnée en paramètre");
         }
         String sql = "SELECT id, name, FROM STATIONS "
@@ -85,7 +85,7 @@ public class StationsDao implements Dao<Integer, StationsDto> {
 
         StationsDto dto = null;
         try ( PreparedStatement pstmt = connexion.prepareStatement(sql)) {
-            pstmt.setString(1, stationName);
+            pstmt.setString(1, key);
             ResultSet rs = pstmt.executeQuery();
 
             int count = 0;
@@ -94,7 +94,7 @@ public class StationsDao implements Dao<Integer, StationsDto> {
                 count++;
             }
             if (count > 1) {
-                throw new RepositoryException("Record pas unique " + stationName);
+                throw new RepositoryException("Record pas unique " + key);
             }
         } catch (SQLException e) {
             throw new RepositoryException(e);

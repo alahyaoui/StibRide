@@ -93,9 +93,9 @@ public class StopsDao implements Dao<Integer, StopsDto> {
         return dto;
     }
 
-    @Override
-    public StopsDto select(String stationName) throws RepositoryException {
-        if (stationName == null || stationName == "") {
+    //@Override
+    public StopsDto select(String key) throws RepositoryException {
+        if (key == null || key == "") {
             throw new RepositoryException("Aucune clé donnée en paramètre");
         }
         String sql = "SELECT id_order, stations.name, id_line FROM STOPS "
@@ -104,7 +104,7 @@ public class StopsDao implements Dao<Integer, StopsDto> {
 
         StopsDto dto = null;
         try ( PreparedStatement pstmt = connexion.prepareStatement(sql)) {
-            pstmt.setString(1, stationName);
+            pstmt.setString(1, key);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {

@@ -33,6 +33,6 @@ public interface Dao<K, T extends Dto<K>> {
      */
     T select(K key) throws RepositoryException;
 
-    T select(String stationName) throws RepositoryException;
+    //T select(String key) throws RepositoryException;
 
 }

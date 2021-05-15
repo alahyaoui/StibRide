@@ -35,8 +35,7 @@ public interface Repository<K, T extends Dto<K>> {
      */
     T get(K key) throws RepositoryException;
 
-    T get(String string) throws RepositoryException;
-
+    //T get(String string) throws RepositoryException;
     /**
      * Returns true if the element exist in the repository and false otherwise.
      * An element is found by this key.
@@ -48,6 +47,5 @@ public interface Repository<K, T extends Dto<K>> {
      */
     boolean contains(K key) throws RepositoryException;
 
-    boolean contains(String stationName) throws RepositoryException;
-
+    //boolean contains(String stationName) throws RepositoryException;
 }
