@@ -5,6 +5,7 @@ import g54895.atl.stibride.presenter.Presenter;
 import org.controlsfx.control.SearchableComboBox;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -28,7 +29,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private SearchableComboBox<String> destination;
-    
+
     @FXML
     private Button searchButton;
 
@@ -54,23 +55,33 @@ public class HomeController implements Initializable {
 
         origin.setValue(origin.getItems().get(0));
         destination.setValue(destination.getItems().get(1));
-        
+
     }
 
-    
+    private List<StationsDto> convertStationsToDisplay(List<StationsDto> stations) {
+        List<StationsDto> path = new ArrayList<>();
+        path.add(new StationsDto(0, origin.getValue()));
+        for (int i = stations.size() - 1; i >= 0; i--) {
+            path.add(stations.get(i));
+        }
+        return path;
+    }
+
     public void updateTableView(List<StationsDto> stations) {
-        /*
+
+        List<StationsDto> path = convertStationsToDisplay(stations);
+        //Manière 1
         resultResearch.getItems().clear();
         resultResearch.refresh();
-         */
-        resultResearch.getItems().remove(data);
-        data.removeAll(data);
-        data.clear();
-        data.addAll(stations);
-
+        data.addAll(path);
         resultResearch.setItems(data);
-        //resultResearch.getItems().addAll(FXCollections.observableArrayList(stations));
 
+        //Manière 2
+        /*resultResearch.getItems().remove(data);
+            data.removeAll(data);
+            data.clear();
+            data.addAll(stations);
+            resultResearch.setItems(data);*/
     }
 
     public void setPresenter(Presenter presenter) {
@@ -85,15 +96,3 @@ public class HomeController implements Initializable {
     }
 
 }
-
-/*public void updateTableView(List<String> stations) {
-        ObservableList<String> data = FXCollections.observableArrayList();
-        
-        for (var row : stations) {
-            data.add(row);//.add(FXCollections.observableArrayList(row));
-        }
-        //resultResearch.getItems().addAll(FXCollections.observableArrayList(stations));
-        //resultResearch.getItems().add(data);//.setItems(data);
-        //resultResearch.getColumns().set(0, stations);
-        resultResearch.setItems(data);
-    }*/
