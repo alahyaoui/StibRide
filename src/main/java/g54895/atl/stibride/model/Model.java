@@ -27,5 +27,9 @@ public interface Model {
 
     public Network getNetwork();
 
+    //public void addFavoriteRoute(String origin, String destination);
+
+    //public void deleteFavoriteRoute(String origin, String destination);
+
     public void addObserver(Observer observer);
 }

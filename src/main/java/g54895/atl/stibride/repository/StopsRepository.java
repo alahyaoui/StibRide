@@ -31,7 +31,7 @@ public class StopsRepository implements Repository<Integer, StopsDto> {
         return dao.select(key);
     }
 
-    @Override
+    //@Override
     public StopsDto get(String stationName) throws RepositoryException {
         return dao.select(stationName);
     }
@@ -42,7 +42,7 @@ public class StopsRepository implements Repository<Integer, StopsDto> {
         return results != null;
     }
 
-    @Override
+    //@Override
     public boolean contains(String stationName) throws RepositoryException {
         var results = dao.select(stationName);
         return results != null;

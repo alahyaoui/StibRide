@@ -1,6 +1,8 @@
 package g54895.atl.stibride.view;
 
+import g54895.atl.stibride.dto.FavoriteRoutesDto;
 import g54895.atl.stibride.dto.StationsDto;
+import g54895.atl.stibride.exception.RepositoryException;
 import g54895.atl.stibride.presenter.Presenter;
 import org.controlsfx.control.SearchableComboBox;
 import java.io.IOException;
@@ -34,6 +36,21 @@ public class HomeController implements Initializable {
     private Button searchButton;
 
     @FXML
+    private ChoiceBox<FavoriteRoutesDto> favorite;
+
+    @FXML
+    private Button chooseButton;
+
+    @FXML
+    private Button addFavorite;
+
+    @FXML
+    private Button updateButton;
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
     private TableView/*<StationsDto/*String*//*>*/ resultResearch;
 
     @FXML
@@ -49,6 +66,36 @@ public class HomeController implements Initializable {
         presenter.doResearch(originText, destinationText);
     }
 
+    @FXML
+    void addFavorite(ActionEvent event) throws RepositoryException, IOException {
+        String originText = origin.getValue();
+        String destinationText = destination.getValue();
+
+        presenter.addFavorite(originText, destinationText);
+    }
+
+    @FXML
+    void chooseFavorite(ActionEvent event) {
+        String originText = favorite.getValue().getOrigin();
+        String destinationText = favorite.getValue().getDestination();
+
+        origin.setValue(originText);
+        destination.setValue(destinationText);
+    }
+
+    @FXML
+    void updateFavorite(ActionEvent event) throws RepositoryException, IOException {
+        String originText = origin.getValue();
+        String destinationText = destination.getValue();
+
+        presenter.updateFavorite(favorite.getValue().getKey(), originText, destinationText);
+    }
+
+    @FXML
+    void deleteFavorite(ActionEvent event) throws RepositoryException, IOException {
+        presenter.deleteFavorite(favorite.getValue());
+    }
+
     public void initChoiceBox(List<String> stations) {
         origin.setItems(FXCollections.observableArrayList(stations));
         destination.setItems(FXCollections.observableArrayList(stations));
@@ -56,6 +103,13 @@ public class HomeController implements Initializable {
         origin.setValue(origin.getItems().get(0));
         destination.setValue(destination.getItems().get(1));
 
+    }
+
+    public void initFavoriteRoutesChoiceBox(List<FavoriteRoutesDto> favoriteRoutes) {
+        favorite.getItems().clear();
+        favorite.setItems(FXCollections.observableArrayList(favoriteRoutes));
+
+        favorite.setValue(favorite.getItems().get(0));
     }
 
     private List<StationsDto> convertStationsToDisplay(List<StationsDto> stations) {
@@ -70,6 +124,7 @@ public class HomeController implements Initializable {
     public void updateTableView(List<StationsDto> stations) {
 
         List<StationsDto> path = convertStationsToDisplay(stations);
+        
         //Manière 1
         resultResearch.getItems().clear();
         resultResearch.refresh();

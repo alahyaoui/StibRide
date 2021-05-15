@@ -1,5 +1,6 @@
 package g54895.atl.stibride.view;
 
+import g54895.atl.stibride.dto.FavoriteRoutesDto;
 import g54895.atl.stibride.dto.StationsDto;
 import g54895.atl.stibride.presenter.Presenter;
 import javafx.fxml.FXMLLoader;
@@ -24,13 +25,12 @@ public class View {
 
     private static Stage primaryStage;
     private static Scene scene;
-    
+
     private static HomeController homeController;
 
     static void setHomeController(HomeController homeController) {
         View.homeController = homeController;
     }
-    
 
     public View(Scene scene) throws IOException {
         this.scene = scene;
@@ -38,7 +38,7 @@ public class View {
 
     public View(Stage stage) throws IOException {
         this.scene = new Scene(loadFXML("primary"), 800, 760);
-        
+
         this.primaryStage = stage;
         this.primaryStage.setScene(scene);
         this.primaryStage.setMinHeight(800);
@@ -53,10 +53,10 @@ public class View {
         homeController.initChoiceBox(stations);
     }
 
-    /*public void updateTableView(List<String> stations) throws IOException {
-        homeController.updateTableView(stations);
-    }*/
-    
+    public void initFavoriteRoutesChoiceBox(List<FavoriteRoutesDto> favoriteRoutes) throws IOException {
+        homeController.initFavoriteRoutesChoiceBox(favoriteRoutes);
+    }
+
     public void updateTableView(List<StationsDto> stations) throws IOException {
         homeController.updateTableView(stations);
     }
@@ -87,4 +87,4 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("test.fxml"));
 Parent root = loader.load();
 TestController controller = loader.<TestController>getController();
 controller.setData(data);
-*/
+ */

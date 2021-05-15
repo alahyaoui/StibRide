@@ -8,9 +8,11 @@ package g54895.atl.stibride.presenter;
 import atl.observer.Observable;
 import atl.observer.Observer;
 import g54895.atl.stibride.config.ConfigManager;
+import g54895.atl.stibride.dto.FavoriteRoutesDto;
 import g54895.atl.stibride.dto.StationsDto;
 import g54895.atl.stibride.exception.RepositoryException;
 import g54895.atl.stibride.model.Model;
+import g54895.atl.stibride.repository.FavoriteRoutesRepository;
 import g54895.atl.stibride.repository.StationsRepository;
 import g54895.atl.stibride.view.View;
 import java.io.IOException;
@@ -73,6 +75,85 @@ public class Presenter implements Observer {
         model.search(origin, destination);
     }
 
+    private void initFavoriteRoutesChoiceBox() throws RepositoryException, IOException {
+        List<FavoriteRoutesDto> favoriteRoutes = new ArrayList<>();
+
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            FavoriteRoutesRepository repository = new FavoriteRoutesRepository();
+            List<FavoriteRoutesDto> dtos = repository.getAll();
+
+            for (FavoriteRoutesDto dto : dtos) {
+                favoriteRoutes.add(dto);
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
+
+        view.initFavoriteRoutesChoiceBox(favoriteRoutes);
+    }
+
+    public void addFavorite(String origin, String destination) throws RepositoryException, IOException {
+        FavoriteRoutesDto dto = null;
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            FavoriteRoutesRepository repository = new FavoriteRoutesRepository();
+            //dto = repository.get(origin, destination);
+            repository.add(new FavoriteRoutesDto(0, origin, destination));
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
+        initFavoriteRoutesChoiceBox();
+    }
+
+    public void updateFavorite(int key, String origin, String destination) throws RepositoryException, IOException {
+        FavoriteRoutesDto dto = new FavoriteRoutesDto(key, origin, destination);
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            FavoriteRoutesRepository repository = new FavoriteRoutesRepository();
+            repository.update(dto);
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
+        initFavoriteRoutesChoiceBox();
+    }
+
+    public void deleteFavorite(FavoriteRoutesDto item) throws RepositoryException, IOException {
+        FavoriteRoutesDto dto = item;
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            FavoriteRoutesRepository repository = new FavoriteRoutesRepository();
+            repository.delete(dto);
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
+        initFavoriteRoutesChoiceBox();
+    }
+
     @Override
     public void update(Observable observable, Object arg) {
         System.out.println("Update");
@@ -85,5 +166,4 @@ public class Presenter implements Observer {
             Logger.getLogger(Presenter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }
