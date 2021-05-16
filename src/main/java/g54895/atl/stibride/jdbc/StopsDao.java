@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author jlc
+ * @author Ayoub
  */
 public class StopsDao implements Dao<Integer, StopsDto> {
 
