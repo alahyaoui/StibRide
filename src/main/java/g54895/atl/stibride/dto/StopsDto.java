@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  *
- * @author jlc
+ * @author Ayoub
  */
 public class StopsDto extends Dto<Integer> {
 
