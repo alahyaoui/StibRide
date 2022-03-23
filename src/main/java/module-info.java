@@ -7,14 +7,13 @@ module stibride {
     requires java.sql;
     requires org.controlsfx.controls;
     
-//opens g54895.atl.stibride.view to javafx.controls;
-    opens g54895.atl.stibride.view to javafx.fxml, javafx.controls, org.controlsfx.controls;
+    opens stibride.view to javafx.fxml, javafx.controls, org.controlsfx.controls;
     exports stibride.view;
     exports stibride.main;
     
-    opens g54895.atl.stibride.dto to javafx.base;
+    opens stibride.dto to javafx.base;
 
 
-    opens g54895.atl.stibride.jdbc to java.sql;
+    opens stibride.jdbc to java.sql;
     exports stibride.jdbc;
 }
