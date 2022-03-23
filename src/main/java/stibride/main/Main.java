@@ -5,16 +5,11 @@
  */
 package stibride.main;
 
-import stibride.exception.RepositoryException;
 import stibride.model.PathFinder;
 import stibride.presenter.Presenter;
 import stibride.view.View;
-import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**

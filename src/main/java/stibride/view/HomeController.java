@@ -51,7 +51,7 @@ public class HomeController implements Initializable {
     private Button deleteButton;
 
     @FXML
-    private TableView/*<StationsDto/*String*//*>*/ resultResearch;
+    private TableView resultResearch;
 
     @FXML
     private TableColumn<StationsDto, String> stationCol;
@@ -122,21 +122,11 @@ public class HomeController implements Initializable {
     }
 
     public void updateTableView(List<StationsDto> stations) {
-
         List<StationsDto> path = convertStationsToDisplay(stations);
-        
-        //Manière 1
         resultResearch.getItems().clear();
         resultResearch.refresh();
         data.addAll(path);
         resultResearch.setItems(data);
-
-        //Manière 2
-        /*resultResearch.getItems().remove(data);
-            data.removeAll(data);
-            data.clear();
-            data.addAll(stations);
-            resultResearch.setItems(data);*/
     }
 
     public void setPresenter(Presenter presenter) {
@@ -146,7 +136,6 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         View.setHomeController(this);
-
         stationCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     }
 

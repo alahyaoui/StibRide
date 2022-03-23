@@ -81,10 +81,3 @@ public class View {
         return fxmlLoader.load();
     }
 }
-
-/*
-FXMLLoader loader = new FXMLLoader(getClass().getResource("test.fxml"));
-Parent root = loader.load();
-TestController controller = loader.<TestController>getController();
-controller.setData(data);
- */
