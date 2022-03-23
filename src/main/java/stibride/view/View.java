@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
@@ -43,6 +44,8 @@ public class View {
         this.primaryStage.setScene(scene);
         this.primaryStage.setMinHeight(800);
         this.primaryStage.setMinWidth(760);
+        Image logo = new Image(getClass().getClassLoader().getResourceAsStream("images/logo.png"));
+        this.primaryStage.getIcons().add(logo);
     }
 
     public void initialize(Presenter presenter) throws IOException {
