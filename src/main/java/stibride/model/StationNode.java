@@ -11,29 +11,29 @@ import stibride.dto.StationsDto;
  *
  * @author Ayoub
  */
-public class Node {
+public class StationNode {
 
     private StationsDto station;
 
-    private List<Node> shortestPath;// = new LinkedList<>();
+    private List<StationNode> shortestPath;
 
-    private Integer distance;// = Integer.MAX_VALUE;
+    private Integer distance;
 
-    Map<Node, Integer> adjacentNodes;// = new HashMap<>();
+    Map<StationNode, Integer> adjacentStations;
 
-    public Node(StationsDto station) {
+    public StationNode(StationsDto station) {
         this.station = station;
         shortestPath = new LinkedList<>();
         distance = Integer.MAX_VALUE;
-        adjacentNodes = new HashMap<>();
+        adjacentStations = new HashMap<>();
     }
 
-    public void addDestination(Node destination, int distance) {
-        adjacentNodes.put(destination, distance);
+    public void addDestination(StationNode destination, int distance) {
+        adjacentStations.put(destination, distance);
     }
 
-    public boolean containsDestination(Node destination) {
-        for (Node node : adjacentNodes.keySet()) {
+    public boolean containsDestination(StationNode destination) {
+        for (StationNode node : adjacentStations.keySet()) {
             if (node.equals(destination)) {
                 return true;
             }
@@ -45,27 +45,31 @@ public class Node {
         shortestPath.clear();
     }
 
+    //Getters
+
     public StationsDto getStation() {
         return station;
     }
 
-    public Map<Node, Integer> getAdjacentNodes() {
-        return adjacentNodes;
+    public Map<StationNode, Integer> getAdjacentNodes() {
+        return adjacentStations;
     }
 
     public Integer getDistance() {
         return distance;
     }
 
-    public List<Node> getShortestPath() {
+    public List<StationNode> getShortestPath() {
         return shortestPath;
     }
+
+    //Setters
 
     public void setDistance(Integer distance) {
         this.distance = distance;
     }
 
-    public void setShortestPath(List<Node> shortestPath) {
+    public void setShortestPath(List<StationNode> shortestPath) {
         this.shortestPath = shortestPath;
     }
 
