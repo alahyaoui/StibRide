@@ -66,16 +66,16 @@ public class Presenter implements Observer {
         model.search(origin, destination);
     }
 
-   /**
-    * Loads the favorite trips from the database and displays them in the favorite routes choice box
-    */
+    /**
+     * Initialize the favorite trips choice box with the favorite trips from the model
+     */
     private void initFavoriteTripsChoiceBox() throws RepositoryException, IOException {
         List<FavoriteTripDto> favoriteTrips = model.getFavoriteTrips();
         view.initFavoriteTripsChoiceBox(favoriteTrips);
     }
 
     /**
-     * Add a favorite trip to the database
+     * Add a favorite trip to the model
      * 
      * @param origin the origin of the trip
      * @param destination the destination of the trip
@@ -86,7 +86,7 @@ public class Presenter implements Observer {
     }
 
     /**
-     * Update the favorite trip in the database
+     * Update the favorite trip in the model and update the favorite trips choice box
      * 
      * @param key The primary key of the favorite trip to update.
      * @param origin the origin of the trip
@@ -96,11 +96,11 @@ public class Presenter implements Observer {
         model.updateFavoriteTrip(key, origin, destination);
         initFavoriteTripsChoiceBox();
     }
-
+    
     /**
-     * Delete a favorite trip from the database
+     * Delete a favorite trip from the database and update the favorite trips choice box
      * 
-     * @param item The item to be deleted.
+     * @param trip The trip to be deleted.
      */
     public void deleteFavoriteTrip(FavoriteTripDto trip) throws RepositoryException, IOException {
         model.deleteFavoriteTrip(trip);
