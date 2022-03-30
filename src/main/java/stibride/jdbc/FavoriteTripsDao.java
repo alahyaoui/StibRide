@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import stibride.dto.FavoriteRoutesDto;
+import stibride.dto.FavoriteTripDto;
 import stibride.exception.RepositoryException;
 import stibride.repository.Dao;
 
@@ -16,27 +16,27 @@ import stibride.repository.Dao;
  *
  * @author Ayoub
  */
-public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
+public class FavoriteTripsDao implements Dao<Integer, FavoriteTripDto> {
 
     private final Connection connexion;
 
-    public FavoriteRoutesDao() throws RepositoryException {
+    public FavoriteTripsDao() throws RepositoryException {
         this.connexion = DBManager.getInstance().getConnection();
     }
 
-    public static FavoriteRoutesDao getInstance() throws RepositoryException {
+    public static FavoriteTripsDao getInstance() throws RepositoryException {
         return favorisDaoHolder.getInstance();
     }
 
     @Override
-    public List<FavoriteRoutesDto> selectAll() throws RepositoryException {
+    public List<FavoriteTripDto> selectAll() throws RepositoryException {
         String query = "SELECT * FROM FAVORITESROUTES";
 
-        List<FavoriteRoutesDto> dtos = new ArrayList<>();
+        List<FavoriteTripDto> dtos = new ArrayList<>();
         try (Statement statement = connexion.createStatement()) {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
-                FavoriteRoutesDto favoris = new FavoriteRoutesDto(result.getInt(1),
+                FavoriteTripDto favoris = new FavoriteTripDto(result.getInt(1),
                         result.getString(2), result.getString(3));
                 dtos.add(favoris);
             }
@@ -48,21 +48,21 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
 
     }
 
-    public FavoriteRoutesDto select(Integer key) throws RepositoryException {
+    public FavoriteTripDto select(Integer key) throws RepositoryException {
         if (key == null) {
             throw new RepositoryException("Aucune clé donnée en paramètre");
         }
         String query = "SELECT id, origin, destination FROM FAVORITESROUTES "
                 + "WHERE id = ?";
 
-        FavoriteRoutesDto route = null;
+        FavoriteTripDto route = null;
         try (PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
             PrepaStatement.setInt(1, key);
             ResultSet rs = PrepaStatement.executeQuery();
 
             int count = 0;
             while (rs.next()) {
-                route = new FavoriteRoutesDto(rs.getInt(0), rs.getString(1), rs.getString(2));
+                route = new FavoriteTripDto(rs.getInt(0), rs.getString(1), rs.getString(2));
                 count++;
             }
             if (count > 1) {
@@ -74,14 +74,14 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
         return route;
     }
 
-    public FavoriteRoutesDto select(FavoriteRoutesDto item) throws RepositoryException {
+    public FavoriteTripDto select(FavoriteTripDto item) throws RepositoryException {
         if (item == null) {
             throw new RepositoryException("Aucune item donnée en paramètre");
         }
         String query = "SELECT id, origin, destination FROM FAVORITESROUTES "
                 + "WHERE origin=? AND destination=? ";
 
-        FavoriteRoutesDto route = null;
+        FavoriteTripDto route = null;
         try (PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
             PrepaStatement.setString(1, item.getOrigin());
             PrepaStatement.setString(2, item.getDestination());
@@ -89,7 +89,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
 
             int count = 0;
             while (rs.next()) {
-                route = new FavoriteRoutesDto(rs.getInt(0), rs.getString(1), rs.getString(2));
+                route = new FavoriteTripDto(rs.getInt(0), rs.getString(1), rs.getString(2));
                 count++;
             }
             if (count > 1) {
@@ -101,14 +101,14 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
         return route;
     }
 
-    public FavoriteRoutesDto select(String origin, String destination) throws RepositoryException {
+    public FavoriteTripDto select(String origin, String destination) throws RepositoryException {
         if (origin == null || destination == null) {
             throw new RepositoryException("Aucune clé donnée en paramètre");
         }
         String query = "SELECT id, origin, destination FROM FAVORITESROUTES "
                 + "WHERE origin=? destination=?";
 
-        FavoriteRoutesDto route = null;
+        FavoriteTripDto route = null;
         try (PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
             PrepaStatement.setString(1, origin);
             PrepaStatement.setString(2, destination);
@@ -116,7 +116,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
 
             int count = 0;
             while (result.next()) {
-                route = new FavoriteRoutesDto(result.getInt(0), result.getString(1), result.getString(2));
+                route = new FavoriteTripDto(result.getInt(0), result.getString(1), result.getString(2));
                 count++;
             }
             if (count > 1) {
@@ -130,7 +130,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
     }
 
     // @Override
-    public Integer insert(FavoriteRoutesDto item) throws RepositoryException {
+    public Integer insert(FavoriteTripDto item) throws RepositoryException {
         if (item == null) {
             throw new RepositoryException("Aucune élément donné en paramètre");
         }
@@ -175,7 +175,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
         return id;
     }
 
-    public void update(FavoriteRoutesDto item) throws RepositoryException {
+    public void update(FavoriteTripDto item) throws RepositoryException {
         if (item == null) {
             throw new RepositoryException("Aucune élément donné en paramètre");
         }
@@ -212,7 +212,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
      * @param key of the element to delete
      * @throws RepositoryException if the FavoritesDto can't be accessed
      */
-    public void delete(FavoriteRoutesDto item) throws RepositoryException {
+    public void delete(FavoriteTripDto item) throws RepositoryException {
         if (item == null) {
             throw new RepositoryException("L' item est null");
         }
@@ -231,8 +231,8 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
 
     private static class favorisDaoHolder {
 
-        private static FavoriteRoutesDao getInstance() throws RepositoryException {
-            return new FavoriteRoutesDao();
+        private static FavoriteTripsDao getInstance() throws RepositoryException {
+            return new FavoriteTripsDao();
         }
 
     }

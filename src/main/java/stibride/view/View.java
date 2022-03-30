@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import stibride.dto.FavoriteRoutesDto;
+import stibride.dto.FavoriteTripDto;
 import stibride.dto.StationsDto;
 import stibride.presenter.Presenter;
 
@@ -49,7 +49,7 @@ public class View {
         homeController.initChoiceBox(stations);
     }
 
-    public void initFavoriteRoutesChoiceBox(List<FavoriteRoutesDto> favoriteRoutes) throws IOException {
+    public void initFavoriteTripsChoiceBox(List<FavoriteTripDto> favoriteRoutes) throws IOException {
         homeController.initFavoriteRoutesChoiceBox(favoriteRoutes);
     }
 

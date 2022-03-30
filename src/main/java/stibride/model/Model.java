@@ -15,7 +15,7 @@ public interface Model {
 
     public void search(String origin, String destination);
 
-    public List<Node> getSearchResult();
+    public List<StationNode> getSearchResult();
 
     public List<String> getSearchResult2();
 

@@ -18,7 +18,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import stibride.dto.FavoriteRoutesDto;
+import stibride.dto.FavoriteTripDto;
 import stibride.dto.StationsDto;
 import stibride.exception.RepositoryException;
 import stibride.presenter.Presenter;
@@ -37,7 +37,7 @@ public class HomeController implements Initializable {
     private Button searchButton;
 
     @FXML
-    private ChoiceBox<FavoriteRoutesDto> favorite;
+    private ChoiceBox<FavoriteTripDto> favorite;
 
     @FXML
     private Button chooseButton;
@@ -72,7 +72,7 @@ public class HomeController implements Initializable {
         String originText = origin.getValue();
         String destinationText = destination.getValue();
 
-        presenter.addFavorite(originText, destinationText);
+        presenter.addFavoriteTrip(originText, destinationText);
     }
 
     @FXML
@@ -89,12 +89,12 @@ public class HomeController implements Initializable {
         String originText = origin.getValue();
         String destinationText = destination.getValue();
 
-        presenter.updateFavorite(favorite.getValue().getKey(), originText, destinationText);
+        presenter.updateFavoriteTrip(favorite.getValue().getKey(), originText, destinationText);
     }
 
     @FXML
     void deleteFavorite(ActionEvent event) throws RepositoryException, IOException {
-        presenter.deleteFavorite(favorite.getValue());
+        presenter.deleteFavoriteTrip(favorite.getValue());
     }
 
     public void initChoiceBox(List<String> stations) {
@@ -106,7 +106,7 @@ public class HomeController implements Initializable {
 
     }
 
-    public void initFavoriteRoutesChoiceBox(List<FavoriteRoutesDto> favoriteRoutes) {
+    public void initFavoriteRoutesChoiceBox(List<FavoriteTripDto> favoriteRoutes) {
         favorite.getItems().clear();
         favorite.setItems(FXCollections.observableArrayList(favoriteRoutes));
 
