@@ -1,13 +1,17 @@
 package stibride.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import observer.Observable;
 import observer.Observer;
+import stibride.config.ConfigManager;
+import stibride.dto.FavoriteTripDto;
 import stibride.dto.StationsDto;
 import stibride.exception.RepositoryException;
+import stibride.repository.FavoriteTripsRepository;
 
 /**
  *
@@ -33,24 +37,24 @@ public class PathFinder extends Observable implements Model {
         shortestPath = graph.search(idOrigin).getShortestPath();
         System.out.println("Taille du plus cours chemin " + shortestPath.size());
         notifyObservers();
-        //graph.clearResearch();
+        // graph.clearResearch();
     }
 
     @Override
-    public void search(String origin, String destination) {    
+    public void search(String origin, String destination) {
         network.getGraphStations().clearResearch();
         StationGraph graph = network.getGraphStations();
-        
-        StationNode destinationNode = graph.search(destination); 
-        
+
+        StationNode destinationNode = graph.search(destination);
+
         graph = Dijkstra.calculateShortestPathFromSource(graph, destinationNode);
-        
+
         StationNode originNode = graph.search(origin);
-        shortestPath = new LinkedList<>(originNode.getShortestPath());     
-        
+        shortestPath = new LinkedList<>(originNode.getShortestPath());
+
         System.out.println("source =" + destinationNode.getStation().getName());
-        System.out.println("origin =" +graph.search(origin).getStation().getName());
-        System.out.println("Taille du plus cours chemin " + shortestPath.size());     
+        System.out.println("origin =" + graph.search(origin).getStation().getName());
+        System.out.println("Taille du plus cours chemin " + shortestPath.size());
         notifyObservers();
     }
 
@@ -59,24 +63,7 @@ public class PathFinder extends Observable implements Model {
     }
 
     @Override
-    public List<StationNode> getSearchResult() {
-        return shortestPath;
-    }
-
-    @Override
-    public List<String> getSearchResult2() {
-        List<String> path = new ArrayList<>();
-
-        for (StationNode node : shortestPath) {
-            String stationName = node.getStation().getName();
-            path.add(stationName);
-        }
-
-        return path;
-    }
-
-    @Override
-    public List<StationsDto> getSearchResult3() {
+    public List<StationsDto> getSearchResult() {
         List<StationsDto> path = new ArrayList<>();
 
         for (StationNode node : shortestPath) {
@@ -85,6 +72,80 @@ public class PathFinder extends Observable implements Model {
         }
 
         return path;
+    }
+
+    public List<FavoriteTripDto> getFavoriteTrips() {
+        List<FavoriteTripDto> favoriteTrips = new ArrayList<>();
+
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            FavoriteTripsRepository repository = new FavoriteTripsRepository();
+            List<FavoriteTripDto> dtos = repository.getAll();
+
+            for (FavoriteTripDto dto : dtos) {
+                favoriteTrips.add(dto);
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
+        return favoriteTrips;
+    }
+
+    public void addFavoriteTrip(String origin, String destination) {
+        FavoriteTripDto dto = null;
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            FavoriteTripsRepository repository = new FavoriteTripsRepository();
+            repository.add(new FavoriteTripDto(0, origin, destination));
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
+    }
+
+    public void updateFavoriteTrip(int key, String origin, String destination) {
+        FavoriteTripDto dto = new FavoriteTripDto(key, origin, destination);
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            FavoriteTripsRepository repository = new FavoriteTripsRepository();
+            repository.update(dto);
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
+    }
+
+    public void deleteFavoriteTrip(FavoriteTripDto trip) {
+        FavoriteTripDto dto = trip;
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            FavoriteTripsRepository repository = new FavoriteTripsRepository();
+            repository.delete(dto);
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
     }
 
     @Override
