@@ -9,11 +9,11 @@ import java.util.Set;
  * 
 * @author Ayoub Lahyaoui
  */
-public class Graph {
+public class StationGraph {
 
-    private Set<Node> nodes;
+    private Set<StationNode> nodes;
 
-    public Graph() {
+    public StationGraph() {
         nodes = new HashSet<>();
     }
 
@@ -22,7 +22,7 @@ public class Graph {
      * 
      * @param node The node to be added to the graph.
      */
-    public void addNode(Node node) {
+    public void addNode(StationNode node) {
         nodes.add(node);
     }
 
@@ -32,9 +32,9 @@ public class Graph {
      * @param key The key of the station to search for.
      * @return The node with the given key.
      */
-    public Node search(int key) {
-        for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
-            Node node = it.next();
+    public StationNode search(int key) {
+        for (Iterator<StationNode> it = nodes.iterator(); it.hasNext();) {
+            StationNode node = it.next();
             if ((key == node.getStation().getKey())) {
                 return node;
             }
@@ -48,9 +48,9 @@ public class Graph {
      * @param stationName The name of the station to search for.
      * @return The node that matches the station name.
      */
-    public Node search(String stationName) {
-        for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
-            Node node = it.next();
+    public StationNode search(String stationName) {
+        for (Iterator<StationNode> it = nodes.iterator(); it.hasNext();) {
+            StationNode node = it.next();
             if ((stationName.equals(node.getStation().getName()))) {
                 return node;
             }
@@ -62,8 +62,8 @@ public class Graph {
      * Clear the shortest path and distance for all nodes.
      */
     public void clearResearch() {
-        for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
-            Node node = it.next();
+        for (Iterator<StationNode> it = nodes.iterator(); it.hasNext();) {
+            StationNode node = it.next();
             node.clearShortestPath();
             node.setDistance(Integer.MAX_VALUE);
         }
@@ -74,7 +74,7 @@ public class Graph {
      * 
      * @return The set of nodes.
      */
-    public Set<Node> getNodes() {
+    public Set<StationNode> getNodes() {
         return nodes;
     }
 }
