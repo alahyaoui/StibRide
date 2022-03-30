@@ -1,10 +1,11 @@
 package stibride.jdbc;
 
-import stibride.config.ConfigManager;
-import stibride.exception.RepositoryException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import stibride.config.ConfigManager;
+import stibride.exception.RepositoryException;
 
 /**
  *
@@ -19,7 +20,7 @@ class DBManager {
 
     Connection getConnection() throws RepositoryException {
         String jdbcUrl = "jdbc:sqlite:" + ConfigManager.getInstance().getProperties("db.url");
-        //|| connection.isClosed()
+        // || connection.isClosed()
         if (connection == null) {
             try {
                 connection = DriverManager.getConnection(jdbcUrl);
