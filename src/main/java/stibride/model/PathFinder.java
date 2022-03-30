@@ -12,6 +12,7 @@ import stibride.dto.FavoriteTripDto;
 import stibride.dto.StationsDto;
 import stibride.exception.RepositoryException;
 import stibride.repository.FavoriteTripsRepository;
+import stibride.repository.StationsRepository;
 
 /**
  * The PathFinder class is used to find the shortest path between two stations
@@ -28,6 +29,36 @@ public class PathFinder extends Observable implements Model {
     public PathFinder() throws RepositoryException {
         network = new Network();
         shortestPath = new LinkedList<>();
+    }
+    
+    @Override
+    public Network getNetwork() {
+        return network;
+    }
+
+    @Override
+    public List<String> getStations(){
+        List<String> stations = new ArrayList<>();
+
+        try {
+            ConfigManager.getInstance().load();
+            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
+            System.out.println("Base de données stockée : " + dbUrl);
+
+            StationsRepository repository = new StationsRepository();
+            List<StationsDto> dtos = repository.getAll();
+
+            for (StationsDto dto : dtos) {
+                stations.add(dto.getName());
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Erreur IO " + ex.getMessage());
+        } catch (RepositoryException ex) {
+            System.out.println("Erreur Repository " + ex.getMessage());
+        }
+
+        return stations;
     }
 
     @Override
@@ -58,10 +89,6 @@ public class PathFinder extends Observable implements Model {
         System.out.println("origin =" + graph.search(origin).getStation().getName());
         System.out.println("Taille du plus cours chemin " + shortestPath.size());
         notifyObservers();
-    }
-
-    public Network getNetwork() {
-        return network;
     }
 
     @Override

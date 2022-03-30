@@ -14,6 +14,20 @@ import stibride.dto.StationsDto;
 public interface Model {
 
     /**
+     * Get the metro network
+     * 
+     * @return The network object.
+     */
+    public Network getNetwork();
+
+    /**
+     * Get a list of all the stations name in the system
+     * 
+     * @return A list of strings.
+     */
+    public List<String> getStations();
+
+    /**
      * Given an origin and destination, find the shortest path between them
      * 
      * @param idOrigin the id of the origin station
@@ -35,13 +49,6 @@ public interface Model {
      * @return A list of stations.
      */
     public List<StationsDto> getSearchResult();
-
-    /**
-     * Get the metro network
-     * 
-     * @return The network object.
-     */
-    public Network getNetwork();
 
     /**
      * Get a list of favorite trips
