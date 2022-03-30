@@ -38,6 +38,11 @@ public class Dto<K> {
         return key;
     }
 
+    /**
+     * Returns a hash code value for the object
+     * 
+     * @return The hash code of the key.
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -45,6 +50,12 @@ public class Dto<K> {
         return hash;
     }
 
+    /**
+     * Returns true if the keys of the two DTOs are equal
+     * 
+     * @param obj the object to compare to
+     * @return Nothing.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
