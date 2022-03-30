@@ -1,16 +1,16 @@
 package stibride.jdbc;
 
-import stibride.dto.StopsDto;
-import stibride.exception.RepositoryException;
-import stibride.repository.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+
+import stibride.dto.StopsDto;
+import stibride.exception.RepositoryException;
+import stibride.repository.Dao;
 
 /**
  *
@@ -28,28 +28,9 @@ public class StopsDao implements Dao<Integer, StopsDto> {
     public static StopsDao getInstance() throws RepositoryException {
         return StopsDaoHolder.getInstance();
     }
-
-    /*@Override
-    public List<StopsDto> selectAll() throws RepositoryException {//On va avoir des objets en double
-        String sql = "SELECT id_order, stations.name, id_line FROM STOPS "
-                + "JOIN STATIONS ON stops.id_station = stations.id "
-                + "ORDER BY id_line, id_order;";
-        List<StopsDto> dtos = new ArrayList<>();
-        try ( Statement stmt = connexion.createStatement();  ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                StopsDto dto = new StopsDto(rs.getInt(1), rs.getString(2));
-                dto.addLine(rs.getInt(3));
-                
-                dtos.add(dto);
-            }
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
-        }
-        return dtos;
-    }*/
     
      @Override
-    public List<StopsDto> selectAll() throws RepositoryException {//On va avoir des objets en double
+    public List<StopsDto> selectAll() throws RepositoryException {
         String sql = "SELECT id_order, id_station, id_line FROM STOPS "
                 + "ORDER BY id_line, id_order;";
         List<StopsDto> dtos = new ArrayList<>();
