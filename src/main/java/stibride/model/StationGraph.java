@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * A graph is a collection of nodes
+ * A graph of stations
  * 
-* @author Ayoub Lahyaoui
+ * @author Ayoub Lahyaoui
  */
 public class StationGraph {
 
@@ -18,19 +18,19 @@ public class StationGraph {
     }
 
     /**
-     * Add a node to the graph
+     * Add a station node to the graph
      * 
-     * @param node The node to be added to the graph.
+     * @param node The node to add to the graph.
      */
     public void addNode(StationNode node) {
         nodes.add(node);
     }
 
     /**
-     * Search for a node in the graph by its key
+     * Search for a station node in the graph by its key
      * 
      * @param key The key of the station to search for.
-     * @return The node with the given key.
+     * @return The node that contains the station with the given key.
      */
     public StationNode search(int key) {
         for (Iterator<StationNode> it = nodes.iterator(); it.hasNext();) {
@@ -43,10 +43,10 @@ public class StationGraph {
     }
 
     /**
-     * Search for a node in the graph by its station name
+     * Search for a station node in the graph by its name
      * 
      * @param stationName The name of the station to search for.
-     * @return The node that matches the station name.
+     * @return The StationNode that matches the station name.
      */
     public StationNode search(String stationName) {
         for (Iterator<StationNode> it = nodes.iterator(); it.hasNext();) {
@@ -59,7 +59,7 @@ public class StationGraph {
     }
 
     /**
-     * Clear the shortest path and distance for all nodes.
+     * Clear the shortest path and distance information for all nodes.
      */
     public void clearResearch() {
         for (Iterator<StationNode> it = nodes.iterator(); it.hasNext();) {
@@ -70,7 +70,7 @@ public class StationGraph {
     }
 
     /**
-     * Returns the nodes in the graph
+     * Returns the set of nodes in the graph
      * 
      * @return The set of nodes.
      */
