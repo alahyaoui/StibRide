@@ -3,14 +3,14 @@ package stibride.dto;
 /**
  * A Data Transfer Object that represents a favorite trip
  * 
- * @author Ayoub
+ * @author Ayoub Lahyaoui
  */
-public class FavoriteRoutesDto extends Dto<Integer> {
+public class FavoriteTripDto extends Dto<Integer> {
 
     private final String origin;
     private final String destination;
 
-    public FavoriteRoutesDto(Integer key, String origin, String destination) {
+    public FavoriteTripDto(Integer key, String origin, String destination) {
         super(key);
         this.origin = origin;
         this.destination = destination;
