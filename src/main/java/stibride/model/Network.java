@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stibride.model;
+
+import java.io.IOException;
+import java.util.List;
 
 import stibride.config.ConfigManager;
 import stibride.dto.StationsDto;
 import stibride.dto.StopsDto;
 import stibride.exception.RepositoryException;
-import stibride.model.Graph;
 import stibride.repository.StationsRepository;
 import stibride.repository.StopsRepository;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  *
