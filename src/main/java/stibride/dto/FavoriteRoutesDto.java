@@ -15,17 +15,31 @@ public class FavoriteRoutesDto extends Dto<Integer> {
         this.destination = destination;
     }
 
+    /**
+     * Get the origin of the favorite trip
+     * 
+     * @return The origin of the trip.
+     */
     public String getOrigin() {
         return origin;
     }
 
+    /**
+     * Get the destination of the favorite trip
+     * 
+     * @return The destination of the trip.
+     */
     public String getDestination() {
         return destination;
     }
 
+    /**
+     * Returns a string representation of the trip
+     * 
+     * @return The origin and destination of the trip.
+     */
     @Override
     public String toString() {
         return origin + " -> " + destination;
     }
-
 }
