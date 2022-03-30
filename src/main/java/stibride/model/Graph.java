@@ -5,21 +5,33 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- *
- * @author Ayoub
+ * A graph is a collection of nodes
+ * 
+* @author Ayoub Lahyaoui
  */
 public class Graph {
 
-    private Set<Node> nodes;// = new HashSet<>();
+    private Set<Node> nodes;
 
     public Graph() {
         nodes = new HashSet<>();
     }
 
+    /**
+     * Add a node to the graph
+     * 
+     * @param node The node to be added to the graph.
+     */
     public void addNode(Node node) {
         nodes.add(node);
     }
 
+    /**
+     * Search for a node in the graph by its key
+     * 
+     * @param key The key of the station to search for.
+     * @return The node with the given key.
+     */
     public Node search(int key) {
         for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
             Node node = it.next();
@@ -30,6 +42,12 @@ public class Graph {
         return null;
     }
 
+    /**
+     * Search for a node in the graph by its station name
+     * 
+     * @param stationName The name of the station to search for.
+     * @return The node that matches the station name.
+     */
     public Node search(String stationName) {
         for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
             Node node = it.next();
@@ -40,6 +58,9 @@ public class Graph {
         return null;
     }
 
+    /**
+     * Clear the shortest path and distance for all nodes.
+     */
     public void clearResearch() {
         for (Iterator<Node> it = nodes.iterator(); it.hasNext();) {
             Node node = it.next();
@@ -48,9 +69,12 @@ public class Graph {
         }
     }
 
-    // getters and setters 
+    /**
+     * Returns the nodes in the graph
+     * 
+     * @return The set of nodes.
+     */
     public Set<Node> getNodes() {
         return nodes;
     }
-
 }
