@@ -14,6 +14,11 @@ import stibride.repository.StopsRepository;
  *
  * @author Ayoub
  */
+/**
+ * The Network class creates a graph of stations
+ * 
+ * @author Ayoub
+ */
 public class Network {
 
     private Graph graphStations;
@@ -25,10 +30,12 @@ public class Network {
     public Network() throws RepositoryException {
         this.graphStations = new Graph();
         initGraph();
-        //System.out.println("La liste de node " + graphStations.getNodes().size());
         initDestinations();
     }
 
+    /**
+     * It creates a graph of stations.
+     */
     public void initGraph() throws RepositoryException {
         try {
             ConfigManager.getInstance().load();
@@ -49,6 +56,11 @@ public class Network {
         }
     }
 
+    /**
+     * - For each stop in the database, we check if the next stop is on the same line and if the order
+     * is one less. 
+     * - If it is, we add the destination to the list of destinations for the origin
+     */
     private void initDestinations() {
         try {
             ConfigManager.getInstance().load();
@@ -74,7 +86,6 @@ public class Network {
                 if (originLine == destinationLine && originOrder == destinationOrder - 1) {
                     addDestination(originStationKey, destinationStationKey);
                 }
-
             }
 
         } catch (IOException ex) {
@@ -84,6 +95,12 @@ public class Network {
         }
     }
 
+    /**
+     * Add a destination to the graph
+     * 
+     * @param originStationKey The station key of the origin station.
+     * @param destinationStationKey The station key of the destination station.
+     */
     private void addDestination(int originStationKey, int destinationStationKey) {
         Node originNode = graphStations.search(originStationKey);
         Node destinationNode = graphStations.search(destinationStationKey);
@@ -97,12 +114,21 @@ public class Network {
         }
     }
 
+    /**
+     * Returns the graph of stations
+     * 
+     * @return The graph of stations.
+     */
     public Graph getGraphStations() {
         return graphStations;
     }
 
+   /**
+    * The function sets the graphStations variable to the graph passed in
+    * 
+    * @param graphStations The graph of stations.
+    */
     public void setGraphStations(Graph graphStations) {
         this.graphStations = graphStations;
     }
-
 }
