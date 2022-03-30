@@ -14,8 +14,10 @@ import stibride.exception.RepositoryException;
 import stibride.repository.FavoriteTripsRepository;
 
 /**
- *
- * @author ayoub
+ * The PathFinder class is used to find the shortest path between two stations
+ * but also to get update and delete the favorite trips of the user.
+ * 
+ * @author Ayoub Lahyaoui
  */
 public class PathFinder extends Observable implements Model {
 
