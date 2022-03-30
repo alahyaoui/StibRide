@@ -17,5 +17,12 @@ With a ssh key:
 $ git clone git@github.com:alahyaoui/StibRide.git
 ```
 
+# Execution
+You need maven installed and added to your PATH environment variables.
+If its not, download maven <a href="https://maven.apache.org/install.html">here</a>
+```
+$ mvn javafx:run
+```
+
 # Author
 - **Lahyaoui Ayoub**
