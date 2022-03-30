@@ -1,20 +1,15 @@
 package stibride.presenter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import observer.Observable;
 import observer.Observer;
-import stibride.config.ConfigManager;
 import stibride.dto.FavoriteTripDto;
-import stibride.dto.StationsDto;
 import stibride.exception.RepositoryException;
 import stibride.model.Model;
-import stibride.repository.FavoriteTripsRepository;
-import stibride.repository.StationsRepository;
 import stibride.view.View;
 
 /**
@@ -47,26 +42,7 @@ public class Presenter implements Observer {
      * Initialize the choice box with the list of stations
      */
     private void initChoiceBox() throws RepositoryException, IOException {
-        List<String> stations = new ArrayList<>();
-
-        try {
-            ConfigManager.getInstance().load();
-            String dbUrl = ConfigManager.getInstance().getProperties("db.url");
-            System.out.println("Base de données stockée : " + dbUrl);
-
-            StationsRepository repository = new StationsRepository();
-            List<StationsDto> dtos = repository.getAll();
-
-            for (StationsDto dto : dtos) {
-                stations.add(dto.getName());
-            }
-
-        } catch (IOException ex) {
-            System.out.println("Erreur IO " + ex.getMessage());
-        } catch (RepositoryException ex) {
-            System.out.println("Erreur Repository " + ex.getMessage());
-        }
-
+        List<String> stations = model.getStations();
         view.initChoiceBox(stations);
     }
 
