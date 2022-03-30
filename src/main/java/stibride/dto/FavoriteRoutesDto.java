@@ -1,7 +1,8 @@
 package stibride.dto;
 
 /**
- *
+ * A Data Transfer Object that represents a favorite trip
+ * 
  * @author Ayoub
  */
 public class FavoriteRoutesDto extends Dto<Integer> {
