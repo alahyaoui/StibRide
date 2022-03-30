@@ -50,7 +50,7 @@ public class View {
     }
 
     public void initFavoriteTripsChoiceBox(List<FavoriteTripDto> favoriteRoutes) throws IOException {
-        homeController.initFavoriteRoutesChoiceBox(favoriteRoutes);
+        homeController.initFavoriteTripsChoiceBox(favoriteRoutes);
     }
 
     public void updateTableView(List<StationsDto> stations) throws IOException {
