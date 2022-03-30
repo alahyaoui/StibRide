@@ -106,9 +106,9 @@ public class HomeController implements Initializable {
 
     }
 
-    public void initFavoriteRoutesChoiceBox(List<FavoriteTripDto> favoriteRoutes) {
+    public void initFavoriteTripsChoiceBox(List<FavoriteTripDto> favoriteTrips) {
         favorite.getItems().clear();
-        favorite.setItems(FXCollections.observableArrayList(favoriteRoutes));
+        favorite.setItems(FXCollections.observableArrayList(favoriteTrips));
 
         favorite.setValue(favorite.getItems().get(0));
     }

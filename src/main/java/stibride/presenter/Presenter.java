@@ -40,6 +40,7 @@ public class Presenter implements Observer {
         model.addObserver(this);
         view.initialize(this);
         initChoiceBox();
+        initFavoriteTripsChoiceBox();
     }
 
     /**
