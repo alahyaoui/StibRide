@@ -14,15 +14,11 @@ public class ConfigManager {
 
     private ConfigManager() {
         prop = new Properties();
-        //url = getClass().getClassLoader().getResource(FILE).getFile();
-        //getClass().getClassLoader().getResourceAsStream(FILE)
     }
 
-    private static final String FILE = "./config/config.properties";
+    private static final String FILE = "config/config.properties";
 
     private final Properties prop;
-
-    //private final String url;
 
     /**
      * Loads the properties from this url.
@@ -30,7 +26,7 @@ public class ConfigManager {
      * @throws IOException if no file is found.
      */
     public void load() throws IOException {
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream(FILE)/*new FileInputStream(url)*/) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(FILE)) {
             prop.load(input);
         } catch (IOException ex) {
             throw new IOException("Chargement configuration impossible ",ex);
