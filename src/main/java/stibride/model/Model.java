@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stibride.model;
+
+import java.util.List;
 
 import observer.Observer;
 import stibride.dto.StationsDto;
-import java.util.List;
 
 /**
  *

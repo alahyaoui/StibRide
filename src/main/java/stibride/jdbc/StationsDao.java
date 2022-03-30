@@ -1,13 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stibride.jdbc;
 
-import stibride.dto.StationsDto;
-import stibride.exception.RepositoryException;
-import stibride.repository.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import stibride.dto.StationsDto;
+import stibride.exception.RepositoryException;
+import stibride.repository.Dao;
 
 /**
  *
@@ -37,7 +33,7 @@ public class StationsDao implements Dao<Integer, StationsDto> {
         String sql = "SELECT id, name FROM STATIONS "
                 + "ORDER BY id;";
         List<StationsDto> dtos = new ArrayList<>();
-        try ( Statement stmt = connexion.createStatement();  ResultSet rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = connexion.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 StationsDto dto = new StationsDto(rs.getInt(1), rs.getString(2));
                 dtos.add(dto);
@@ -57,7 +53,7 @@ public class StationsDao implements Dao<Integer, StationsDto> {
                 + "WHERE id = ?;";
 
         StationsDto dto = null;
-        try ( PreparedStatement pstmt = connexion.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connexion.prepareStatement(sql)) {
             pstmt.setInt(1, key);
             ResultSet rs = pstmt.executeQuery();
 
@@ -75,7 +71,7 @@ public class StationsDao implements Dao<Integer, StationsDto> {
         return dto;
     }
 
-    //@Override
+    // @Override
     public StationsDto select(String key) throws RepositoryException {
         if (key == null || key == "") {
             throw new RepositoryException("Aucune clé donnée en paramètre");
@@ -84,7 +80,7 @@ public class StationsDao implements Dao<Integer, StationsDto> {
                 + "WHERE name = ?;";
 
         StationsDto dto = null;
-        try ( PreparedStatement pstmt = connexion.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connexion.prepareStatement(sql)) {
             pstmt.setString(1, key);
             ResultSet rs = pstmt.executeQuery();
 
@@ -101,7 +97,7 @@ public class StationsDao implements Dao<Integer, StationsDto> {
         }
         return dto;
     }
-    
+
     private static class StationsDaoHolder {
 
         private static StationsDao getInstance() throws RepositoryException {

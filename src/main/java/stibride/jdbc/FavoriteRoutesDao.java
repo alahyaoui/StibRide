@@ -1,13 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stibride.jdbc;
 
-import stibride.dto.FavoriteRoutesDto;
-import stibride.exception.RepositoryException;
-import stibride.repository.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import stibride.dto.FavoriteRoutesDto;
+import stibride.exception.RepositoryException;
+import stibride.repository.Dao;
 
 /**
  *
@@ -37,7 +33,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
         String query = "SELECT * FROM FAVORITESROUTES";
 
         List<FavoriteRoutesDto> dtos = new ArrayList<>();
-        try ( Statement statement = connexion.createStatement()) {
+        try (Statement statement = connexion.createStatement()) {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
                 FavoriteRoutesDto favoris = new FavoriteRoutesDto(result.getInt(1),
@@ -60,7 +56,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
                 + "WHERE id = ?";
 
         FavoriteRoutesDto route = null;
-        try ( PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
+        try (PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
             PrepaStatement.setInt(1, key);
             ResultSet rs = PrepaStatement.executeQuery();
 
@@ -86,7 +82,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
                 + "WHERE origin=? AND destination=? ";
 
         FavoriteRoutesDto route = null;
-        try ( PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
+        try (PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
             PrepaStatement.setString(1, item.getOrigin());
             PrepaStatement.setString(2, item.getDestination());
             ResultSet rs = PrepaStatement.executeQuery();
@@ -113,7 +109,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
                 + "WHERE origin=? destination=?";
 
         FavoriteRoutesDto route = null;
-        try ( PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
+        try (PreparedStatement PrepaStatement = connexion.prepareStatement(query)) {
             PrepaStatement.setString(1, origin);
             PrepaStatement.setString(2, destination);
             ResultSet result = PrepaStatement.executeQuery();
@@ -133,7 +129,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
         return route;
     }
 
-    //@Override
+    // @Override
     public Integer insert(FavoriteRoutesDto item) throws RepositoryException {
         if (item == null) {
             throw new RepositoryException("Aucune élément donné en paramètre");
@@ -142,7 +138,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
         Integer id = 0;
         String sql = "INSERT INTO FAVORITESROUTES(origin, destination) VALUES (?, ?)";
 
-        try ( PreparedStatement pstmt = connexion.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connexion.prepareStatement(sql)) {
             pstmt.setString(1, item.getOrigin());
             pstmt.setString(2, item.getDestination());
             pstmt.executeUpdate();
@@ -165,7 +161,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
         Integer id = 0;
         String sql = "INSERT INTO FAVORITESROUTES(origin, destination) VALUES (?, ?)";
 
-        try ( PreparedStatement prep = connexion.prepareStatement(sql)) {
+        try (PreparedStatement prep = connexion.prepareStatement(sql)) {
             prep.setString(1, origin);
             prep.setString(2, destination);
             prep.executeUpdate();
@@ -184,7 +180,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
             throw new RepositoryException("Aucune élément donné en paramètre");
         }
         String query = "UPDATE FAVORITESROUTES SET origin=?, destination=? where id=?";
-        try ( PreparedStatement prep = connexion.prepareStatement(query)) {
+        try (PreparedStatement prep = connexion.prepareStatement(query)) {
             prep.setString(1, item.getOrigin());
             prep.setString(2, item.getDestination());
             prep.setInt(3, item.getKey());
@@ -202,7 +198,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
 
         String query = "DELETE FROM FAVORITESROUTES WHERE id =?";
 
-        try ( PreparedStatement prep = connexion.prepareStatement(query)) {
+        try (PreparedStatement prep = connexion.prepareStatement(query)) {
             prep.setInt(1, key);
             prep.executeUpdate();
         } catch (SQLException ex) {
@@ -223,7 +219,7 @@ public class FavoriteRoutesDao implements Dao<Integer, FavoriteRoutesDto> {
 
         String query = "DELETE FROM FAVORITESROUTES WHERE id=? AND origin=? AND destination=?";
 
-        try ( PreparedStatement prep = connexion.prepareStatement(query)) {
+        try (PreparedStatement prep = connexion.prepareStatement(query)) {
             prep.setInt(1, item.getKey());
             prep.setString(2, item.getOrigin());
             prep.setString(3, item.getDestination());

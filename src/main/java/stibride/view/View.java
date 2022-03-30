@@ -1,23 +1,16 @@
 package stibride.view;
 
-import stibride.dto.FavoriteRoutesDto;
-import stibride.dto.StationsDto;
-import stibride.presenter.Presenter;
+import java.io.IOException;
+import java.util.List;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.event.EventHandler;
-import java.io.IOException;
-import java.util.List;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
+import javafx.stage.Stage;
+import stibride.dto.FavoriteRoutesDto;
+import stibride.dto.StationsDto;
+import stibride.presenter.Presenter;
 
 /**
  * JavaFX App

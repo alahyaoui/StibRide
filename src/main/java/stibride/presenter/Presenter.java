@@ -1,9 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stibride.presenter;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import observer.Observable;
 import observer.Observer;
@@ -15,11 +16,6 @@ import stibride.model.Model;
 import stibride.repository.FavoriteRoutesRepository;
 import stibride.repository.StationsRepository;
 import stibride.view.View;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
