@@ -17,7 +17,7 @@ public class PathFinder extends Observable implements Model {
 
     private Network network;
 
-    private List<Node> shortestPath;
+    private List<StationNode> shortestPath;
 
     public PathFinder() throws RepositoryException {
         network = new Network();
@@ -26,9 +26,9 @@ public class PathFinder extends Observable implements Model {
 
     @Override
     public void search(int idOrigin, int idDestination) {
-        Graph graph = network.getGraphStations();
+        StationGraph graph = network.getGraphStations();
 
-        Node source = graph.search(idDestination);
+        StationNode source = graph.search(idDestination);
         Dijkstra.calculateShortestPathFromSource(graph, source);
         shortestPath = graph.search(idOrigin).getShortestPath();
         System.out.println("Taille du plus cours chemin " + shortestPath.size());
@@ -39,13 +39,13 @@ public class PathFinder extends Observable implements Model {
     @Override
     public void search(String origin, String destination) {    
         network.getGraphStations().clearResearch();
-        Graph graph = network.getGraphStations();
+        StationGraph graph = network.getGraphStations();
         
-        Node destinationNode = graph.search(destination); 
+        StationNode destinationNode = graph.search(destination); 
         
         graph = Dijkstra.calculateShortestPathFromSource(graph, destinationNode);
         
-        Node originNode = graph.search(origin);
+        StationNode originNode = graph.search(origin);
         shortestPath = new LinkedList<>(originNode.getShortestPath());     
         
         System.out.println("source =" + destinationNode.getStation().getName());
@@ -59,7 +59,7 @@ public class PathFinder extends Observable implements Model {
     }
 
     @Override
-    public List<Node> getSearchResult() {
+    public List<StationNode> getSearchResult() {
         return shortestPath;
     }
 
@@ -67,7 +67,7 @@ public class PathFinder extends Observable implements Model {
     public List<String> getSearchResult2() {
         List<String> path = new ArrayList<>();
 
-        for (Node node : shortestPath) {
+        for (StationNode node : shortestPath) {
             String stationName = node.getStation().getName();
             path.add(stationName);
         }
@@ -79,7 +79,7 @@ public class PathFinder extends Observable implements Model {
     public List<StationsDto> getSearchResult3() {
         List<StationsDto> path = new ArrayList<>();
 
-        for (Node node : shortestPath) {
+        for (StationNode node : shortestPath) {
             StationsDto station = node.getStation();
             path.add(station);
         }

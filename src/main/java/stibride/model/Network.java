@@ -21,14 +21,14 @@ import stibride.repository.StopsRepository;
  */
 public class Network {
 
-    private Graph graphStations;
+    private StationGraph graphStations;
 
-    public Network(Graph graphStations) {
+    public Network(StationGraph graphStations) {
         this.graphStations = graphStations;
     }
 
     public Network() throws RepositoryException {
-        this.graphStations = new Graph();
+        this.graphStations = new StationGraph();
         initGraph();
         initDestinations();
     }
@@ -46,7 +46,7 @@ public class Network {
             List<StationsDto> dtos = repository.getAll();
 
             for (StationsDto dto : dtos) {
-                graphStations.addNode(new Node(dto));
+                graphStations.addNode(new StationNode(dto));
             }
 
         } catch (IOException ex) {
@@ -102,8 +102,8 @@ public class Network {
      * @param destinationStationKey The station key of the destination station.
      */
     private void addDestination(int originStationKey, int destinationStationKey) {
-        Node originNode = graphStations.search(originStationKey);
-        Node destinationNode = graphStations.search(destinationStationKey);
+        StationNode originNode = graphStations.search(originStationKey);
+        StationNode destinationNode = graphStations.search(destinationStationKey);
 
         if (!originNode.containsDestination(destinationNode)) {
             originNode.addDestination(destinationNode, 1);
@@ -119,7 +119,7 @@ public class Network {
      * 
      * @return The graph of stations.
      */
-    public Graph getGraphStations() {
+    public StationGraph getGraphStations() {
         return graphStations;
     }
 
@@ -128,7 +128,7 @@ public class Network {
     * 
     * @param graphStations The graph of stations.
     */
-    public void setGraphStations(Graph graphStations) {
+    public void setGraphStations(StationGraph graphStations) {
         this.graphStations = graphStations;
     }
 }

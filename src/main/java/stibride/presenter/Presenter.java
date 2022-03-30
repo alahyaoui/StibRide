@@ -13,7 +13,7 @@ import stibride.dto.FavoriteTripDto;
 import stibride.dto.StationsDto;
 import stibride.exception.RepositoryException;
 import stibride.model.Model;
-import stibride.repository.FavoriteRoutesRepository;
+import stibride.repository.FavoriteTripsRepository;
 import stibride.repository.StationsRepository;
 import stibride.view.View;
 
@@ -102,7 +102,7 @@ public class Presenter implements Observer {
             String dbUrl = ConfigManager.getInstance().getProperties("db.url");
             System.out.println("Base de données stockée : " + dbUrl);
 
-            FavoriteRoutesRepository repository = new FavoriteRoutesRepository();
+            FavoriteTripsRepository repository = new FavoriteTripsRepository();
             List<FavoriteTripDto> dtos = repository.getAll();
 
             for (FavoriteTripDto dto : dtos) {
@@ -131,7 +131,7 @@ public class Presenter implements Observer {
             String dbUrl = ConfigManager.getInstance().getProperties("db.url");
             System.out.println("Base de données stockée : " + dbUrl);
 
-            FavoriteRoutesRepository repository = new FavoriteRoutesRepository();
+            FavoriteTripsRepository repository = new FavoriteTripsRepository();
             repository.add(new FavoriteTripDto(0, origin, destination));
 
         } catch (IOException ex) {
@@ -156,7 +156,7 @@ public class Presenter implements Observer {
             String dbUrl = ConfigManager.getInstance().getProperties("db.url");
             System.out.println("Base de données stockée : " + dbUrl);
 
-            FavoriteRoutesRepository repository = new FavoriteRoutesRepository();
+            FavoriteTripsRepository repository = new FavoriteTripsRepository();
             repository.update(dto);
 
         } catch (IOException ex) {
@@ -179,7 +179,7 @@ public class Presenter implements Observer {
             String dbUrl = ConfigManager.getInstance().getProperties("db.url");
             System.out.println("Base de données stockée : " + dbUrl);
 
-            FavoriteRoutesRepository repository = new FavoriteRoutesRepository();
+            FavoriteTripsRepository repository = new FavoriteTripsRepository();
             repository.delete(dto);
 
         } catch (IOException ex) {

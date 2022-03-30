@@ -21,19 +21,19 @@ class Dijkstra {
      * @return The graph with the shortest paths from the source node to all other
      *         nodes.
      */
-    public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
+    public static StationGraph calculateShortestPathFromSource(StationGraph graph, StationNode source) {
         source.setDistance(0);
 
-        Set<Node> settledNodes = new HashSet<>();
-        Set<Node> unsettledNodes = new HashSet<>();
+        Set<StationNode> settledNodes = new HashSet<>();
+        Set<StationNode> unsettledNodes = new HashSet<>();
 
         unsettledNodes.add(source);
 
         while (!unsettledNodes.isEmpty()) {
-            Node currentNode = getLowestDistanceNode(unsettledNodes);
+            StationNode currentNode = getLowestDistanceNode(unsettledNodes);
             unsettledNodes.remove(currentNode);
-            for (Map.Entry<Node, Integer> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
-                Node adjacentNode = adjacencyPair.getKey();
+            for (Map.Entry<StationNode, Integer> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
+                StationNode adjacentNode = adjacencyPair.getKey();
                 Integer edgeWeight = adjacencyPair.getValue();
                 if (!settledNodes.contains(adjacentNode)) {
                     calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
@@ -51,10 +51,10 @@ class Dijkstra {
      * @param unsettledNodes A set of nodes that have not yet been settled.
      * @return The node with the lowest distance.
      */
-    private static Node getLowestDistanceNode(Set<Node> unsettledNodes) {
-        Node lowestDistanceNode = null;
+    private static StationNode getLowestDistanceNode(Set<StationNode> unsettledNodes) {
+        StationNode lowestDistanceNode = null;
         int lowestDistance = Integer.MAX_VALUE;
-        for (Node node : unsettledNodes) {
+        for (StationNode node : unsettledNodes) {
             int nodeDistance = node.getDistance();
             if (nodeDistance < lowestDistance) {
                 lowestDistance = nodeDistance;
@@ -77,11 +77,11 @@ class Dijkstra {
      * @param sourceNode     The node from which the shortest path is being
      *                       calculated.
      */
-    private static void calculateMinimumDistance(Node evaluationNode, Integer edgeWeigh, Node sourceNode) {
+    private static void calculateMinimumDistance(StationNode evaluationNode, Integer edgeWeigh, StationNode sourceNode) {
         Integer sourceDistance = sourceNode.getDistance();
         if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
             evaluationNode.setDistance(sourceDistance + edgeWeigh);
-            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
+            LinkedList<StationNode> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
             shortestPath.add(sourceNode);
             evaluationNode.setShortestPath(shortestPath);
         }
