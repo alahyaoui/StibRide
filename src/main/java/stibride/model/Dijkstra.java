@@ -6,11 +6,21 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
- * @author Ayoub
+ * For each node in the graph, calculate the minimum distance to the source node
+ * 
+ * @see https://www.baeldung.com/java-dijkstra
+ * @author baeldung
  */
 class Dijkstra {
 
+    /**
+     * For each node in the graph, calculate the minimum distance to the source node
+     * 
+     * @param graph  The graph to calculate the shortest path for.
+     * @param source The node from which to calculate the shortest path.
+     * @return The graph with the shortest paths from the source node to all other
+     *         nodes.
+     */
     public static Graph calculateShortestPathFromSource(Graph graph, Node source) {
         source.setDistance(0);
 
@@ -35,6 +45,12 @@ class Dijkstra {
         return graph;
     }
 
+    /**
+     * Find the node with the lowest distance in the set of unsettled nodes
+     * 
+     * @param unsettledNodes A set of nodes that have not yet been settled.
+     * @return The node with the lowest distance.
+     */
     private static Node getLowestDistanceNode(Set<Node> unsettledNodes) {
         Node lowestDistanceNode = null;
         int lowestDistance = Integer.MAX_VALUE;
@@ -48,6 +64,19 @@ class Dijkstra {
         return lowestDistanceNode;
     }
 
+    /**
+     * If the distance from the source node to the current node is less than the
+     * current distance of
+     * the current node, then update the current node's distance and add the source
+     * node to the
+     * shortest path.
+     * 
+     * @param evaluationNode The node that we are evaluating.
+     * @param edgeWeigh      The weight of the edge between the source node and the
+     *                       evaluation node.
+     * @param sourceNode     The node from which the shortest path is being
+     *                       calculated.
+     */
     private static void calculateMinimumDistance(Node evaluationNode, Integer edgeWeigh, Node sourceNode) {
         Integer sourceDistance = sourceNode.getDistance();
         if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
@@ -57,5 +86,4 @@ class Dijkstra {
             evaluationNode.setShortestPath(shortestPath);
         }
     }
-
 }
